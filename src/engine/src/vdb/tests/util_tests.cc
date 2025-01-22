@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <filesystem>
 
 #include <arrow/testing/gtest_util.h>
 
