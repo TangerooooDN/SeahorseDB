@@ -2,6 +2,27 @@
 
 The seahorse, a small marine fish, shares its name with the hippocampus, a vital brain region responsible for transferring short-term memory to long-term memory. Similarly, SeahorseDB, an in-memory database built on Redis(7.2.4), is designed for fast and scalable similarity search, acting as the computer's equivalent of the hippocampus for efficient data consolidation and retrieval. To ensure optimal performance, SeahorseDB incorporates various optimizations, making it a robust and high-performance solution for managing complex data operations.
 
+# Package Requirements
+### Ubuntu/Debian
+```bash
+sudo apt update
+sudo apt install -y docker docker-buildx docker-compose
+```
+### CentOS/RHEL
+```bash
+sudo yum update
+sudo yum install -y docker docker-buildx docker-compose
+```
+### Fedora
+```bash
+sudo dnf update
+sudo dnf install -y docker docker-buildx docker-compose
+```
+### macOS
+```bash
+brew update
+brew install docker docker-buildx docker-compose
+```
 
 # Quick Start
 
