@@ -61,7 +61,7 @@ if(NOT DEFINED WITH_TESTS)
 endif()
 
 if(NOT DEFINED APPLY_CLANG_FORMAT)
-  option(APPLY_CLANG_FORMAT "execute clang-format before building redis-server" ON)
+  option(APPLY_CLANG_FORMAT "execute clang-format before building seahorse-server" ON)
 endif()
 
 set(CMAKE_C_STANDARD 99)
@@ -111,7 +111,7 @@ include(deps/CMakeLists.txt)
 # Create release header files(release.c/.h)
 execute_process(COMMAND sh mkreleasehdr.sh WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-# List of source files for redis-server, derived from the object files mentioned
+# List of source files for seahorse-server, derived from the object files mentioned
 set(REDIS_SERVER_SOURCES
     src/acl.c
     src/adlist.c
@@ -257,17 +257,17 @@ set(HSNWLIB_SOURCES
 include_directories(${CMAKE_INSTALL_PREFIX}/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-# Add executable target for redis-server
-add_executable(redis-server ${REDIS_SERVER_SOURCES} ${VDB_SOURCES} ${HNSWLIB_SOURCES})
+# Add executable target for seahorse-server
+add_executable(seahorse-server ${REDIS_SERVER_SOURCES} ${VDB_SOURCES} ${HNSWLIB_SOURCES})
 
 # `add_dependencies()` enforces the order of compilations
-add_dependencies(redis-server jemalloc_lib)
+add_dependencies(seahorse-server jemalloc_lib)
 
-# add pthread into redis-server using 'target_compile_options'
-target_compile_options(redis-server PRIVATE -pthread)
+# add pthread into seahorse-server using 'target_compile_options'
+target_compile_options(seahorse-server PRIVATE -pthread)
 
-# Link necessary libraries for redis-server
-target_link_libraries(redis-server pthread hiredis lua hdr_histogram linenoise fpconv jemalloc_lib Arrow::arrow_shared ArrowDataset::arrow_dataset_shared)
+# Link necessary libraries for seahorse-server
+target_link_libraries(seahorse-server pthread hiredis lua hdr_histogram linenoise fpconv jemalloc_lib Arrow::arrow_shared ArrowDataset::arrow_dataset_shared)
 
 add_library(redis-lib ${REDIS_SERVER_SOURCES} ${VDB_SOURCES} ${HNSWLIB_SOURCES})
 target_link_libraries(redis-lib hiredis lua hdr_histogram linenoise fpconv jemalloc_lib Arrow::arrow_shared ArrowDataset::arrow_dataset_shared)
@@ -324,7 +324,7 @@ endif()
 
 if (APPLY_CLANG_FORMAT)
   add_custom_command(
-      TARGET redis-server PRE_BUILD
+      TARGET seahorse-server PRE_BUILD
       COMMENT "Executing clang-format before building"
       COMMAND clang-format -i --style=file `find ../src/vdb -type f`
   )
